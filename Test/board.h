@@ -15,8 +15,12 @@ class Board
       bool Create();
       void Print();
       void Delete();
+      bool PositionExist(int r,int c);
+      bool Stay(int r,int c);
+      enum State{Empty,You,AI};
   private:
       void SetColor(int font,int background);
+
 
 };
 #endif // BOARD_H_

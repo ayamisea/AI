@@ -12,6 +12,7 @@ public:
     void Display();
     bool End();
     bool Attack(int row,int col);
+    void ShowRemainBrick();
 private:
     Board b;
     Player p1;

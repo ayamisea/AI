@@ -35,6 +35,41 @@ bool Game::Attack(int row,int col)
 {
     int r = row-1;
     int c = col-1;
-    if(r<0||r>=b.size||c<0||c>=b.size) return false;
+    if((r+c)%2!=0||!b.PositionExist(r,c)) return false;
+
+    b.board[r][c]=b.Empty;
+    if(b.board[r][c]==b.You) p1.remaining_bricks--;
+    else p2.remaining_bricks--;
+
+    int cut=0;
+    if(b.PositionExist(r-1,c)&&!b.Stay(r-1,c)) //Check Up
+    {
+        b.board[r-1][c]=b.Empty;
+        cut++;
+    }
+    if(b.PositionExist(r+1,c)&&!b.Stay(r+1,c)) //Check Down
+    {
+        b.board[r+1][c]=b.Empty;
+        cut++;
+    }
+    if(b.PositionExist(r,c-1)&&!b.Stay(r,c-1)) //Check Left
+    {
+        b.board[r][c-1]=b.Empty;
+        cut++;
+    }
+    if(b.PositionExist(r,c+1)&&!b.Stay(r,c+1)) //Check Right
+    {
+        b.board[r][c+1]=b.Empty;
+        cut++;
+    }
+
+    if(b.board[r][c]==b.You) p2.remaining_bricks-=cut;
+    else p1.remaining_bricks-=cut;
+
     return true;
+}
+
+void Game::ShowRemainBrick()
+{
+    std::cout<<"Remaining Bricks:"<<" You:"<<p1.remaining_bricks<<", AI:"<<p2.remaining_bricks<<"\n\n";
 }
