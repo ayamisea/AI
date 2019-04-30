@@ -1,4 +1,3 @@
-#include"board.h"
 #include"player.h"
 #include<limits.h>
 #ifndef GAME_H_
@@ -13,6 +12,7 @@ public:
     bool End();
     bool Attack(int row,int col);
     void ShowRemainBrick();
+    void AIstrategy();
 private:
     Board b;
     Player p1;

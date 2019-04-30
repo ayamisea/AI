@@ -2,7 +2,7 @@
 1556635964 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
 	"game.h"
 
-1556630301 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
+1556638108 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
 	"game.h"
 	<time.h>
 
@@ -17,11 +17,11 @@
 	<iomanip>
 	<windows.h>
 
-1556618755 d:\ms\first_year_2\ai\term_project\test\game.h
-	"board.h"
+1556638108 d:\ms\first_year_2\ai\term_project\test\game.h
 	"player.h"
 	<limits.h>
 
-1556589370 d:\ms\first_year_2\ai\term_project\test\player.h
+1556638639 d:\ms\first_year_2\ai\term_project\test\player.h
 	<iostream>
+	"board.h"
 

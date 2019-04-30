@@ -11,8 +11,9 @@ bool Game::Initialize()
     }
 
     int bricks = b.size*b.size/2;
-    p1.SetRemBrick(bricks);
-    p2.SetRemBrick(bricks);
+    p1.Setting(bricks,b.You);
+    p2.Setting(bricks,b.AI);
+
     if(!b.Create()) return false; //Board -> Insufficient memory!
     return true;
 }
@@ -77,4 +78,9 @@ bool Game::Attack(int row,int col)
 void Game::ShowRemainBrick()
 {
     std::cout<<"Remaining Bricks:"<<" You:"<<p1.remaining_bricks<<", AI:"<<p2.remaining_bricks<<"\n\n";
+}
+
+void Game::AIstrategy()
+{
+
 }

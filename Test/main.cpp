@@ -4,7 +4,6 @@ int main()
 {
     int n =1;
     Game game;
-    long long int arr[100000][100000];
     if(!game.Initialize())
     {
         std::cout<<"Error ...";
