@@ -27,7 +27,9 @@ bool Game::End()
 {
     if(p1.remaining_bricks!=0 && p2.remaining_bricks!=0) return false;
     b.Delete();
-
+    if(p1.remaining_bricks==0&&p2.remaining_bricks==0) std::cout<<"The game ended in a draw.\n";
+    else if(p1.remaining_bricks==0) std::cout<<"You win!!\n";
+    else std::cout<<"You lose~~\n";
     return true;
 }
 
@@ -38,10 +40,12 @@ bool Game::Attack(int row,int col)
 
     if(!b.PositionExist(r,c)) return false;
     if(b.board[r][c]==b.Empty) return false;
+
     if(b.board[r][c]==b.You) p1.remaining_bricks--;
     else p2.remaining_bricks--;
     int turn = b.board[r][c];
     b.board[r][c]=b.Empty;
+
     int cut=0;
     if(b.PositionExist(r-1,c)&&b.board[r-1][c]!=b.Empty&&!b.Stay(r-1,c)) //Check Up
     {
