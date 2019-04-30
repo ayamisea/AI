@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1556631976 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
+1556635964 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
 	"game.h"
 
 1556630301 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
@@ -9,7 +9,7 @@
 1556589239 source:d:\ms\first_year_2\ai\term_project\test\player.cpp
 	"player.h"
 
-1556632482 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
+1556637227 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
 	"board.h"
 
 1556618000 d:\ms\first_year_2\ai\term_project\test\board.h

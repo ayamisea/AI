@@ -23,8 +23,12 @@ void Board::Print()
 
 bool Board::Create()
 {
-    board = new int*[size];
-    for(int i=0;i<size;++i)  board[i]=new int[size];
+    try
+    {
+        board = new int*[size];
+        for(int i=0;i<size;++i)  board[i]=new int[size];
+    }
+    catch(std::bad_alloc) {return false;}
 
     if(board)
     {
