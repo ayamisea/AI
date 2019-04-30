@@ -11,7 +11,6 @@ void Board::Print()
         std::cout<<std::setw(4)<<i+1;
         for(int j=0;j<size;++j)
         {
-
             if(board[i][j]==1) SetColor(12,0);
             else SetColor(10,0);
             std::cout<<std::setw(4)<<"*";

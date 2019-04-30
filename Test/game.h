@@ -10,10 +10,12 @@ public:
     ~Game(){};
     bool Initialize();
     void Display();
-    void End();
+    bool End();
+    bool Attack(int row,int col);
 private:
     Board b;
     Player p1;
     Player p2; //ai
+
 };
 #endif // GAME_H_

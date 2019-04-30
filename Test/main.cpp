@@ -12,8 +12,21 @@ int main()
     else std::cout<<"Start the game.\n";
     system("pause");
     system("cls");
-    game.Display();
-    game.End();
+
+    while(!game.End())
+    {
+        game.Display();
+
+        int row=0;
+        int col=0;
+        std::cout<<"What the brick do you want to take away[row,col]?";
+        scanf("%d %d",&row,&col);
+        if(game.Attack(row,col)) std::cout<<"Attack!!\n";
+        else std::cout<<"Cannot attack!!\n";
+
+        system("pause");
+        system("cls");
+    }
 
     return 0;
 }
