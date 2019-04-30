@@ -35,35 +35,36 @@ bool Game::Attack(int row,int col)
 {
     int r = row-1;
     int c = col-1;
-    if((r+c)%2!=0||!b.PositionExist(r,c)) return false;
 
-    b.board[r][c]=b.Empty;
+    if(!b.PositionExist(r,c)) return false;
+    if(b.board[r][c]==b.Empty) return false;
     if(b.board[r][c]==b.You) p1.remaining_bricks--;
     else p2.remaining_bricks--;
-
+    int turn = b.board[r][c];
+    b.board[r][c]=b.Empty;
     int cut=0;
-    if(b.PositionExist(r-1,c)&&!b.Stay(r-1,c)) //Check Up
+    if(b.PositionExist(r-1,c)&&b.board[r-1][c]!=b.Empty&&!b.Stay(r-1,c)) //Check Up
     {
         b.board[r-1][c]=b.Empty;
         cut++;
     }
-    if(b.PositionExist(r+1,c)&&!b.Stay(r+1,c)) //Check Down
+    if(b.PositionExist(r+1,c)&&b.board[r+1][c]!=b.Empty&&!b.Stay(r+1,c)) //Check Down
     {
         b.board[r+1][c]=b.Empty;
         cut++;
     }
-    if(b.PositionExist(r,c-1)&&!b.Stay(r,c-1)) //Check Left
+    if(b.PositionExist(r,c-1)&&b.board[r][c-1]!=b.Empty&&!b.Stay(r,c-1)) //Check Left
     {
         b.board[r][c-1]=b.Empty;
         cut++;
     }
-    if(b.PositionExist(r,c+1)&&!b.Stay(r,c+1)) //Check Right
+    if(b.PositionExist(r,c+1)&&b.board[r][c+1]!=b.Empty&&!b.Stay(r,c+1)) //Check Right
     {
         b.board[r][c+1]=b.Empty;
         cut++;
     }
 
-    if(b.board[r][c]==b.You) p2.remaining_bricks-=cut;
+    if(turn==b.You) p2.remaining_bricks-=cut;
     else p1.remaining_bricks-=cut;
 
     return true;

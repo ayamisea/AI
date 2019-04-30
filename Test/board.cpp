@@ -64,6 +64,7 @@ bool Board::PositionExist(int r,int c)
 
 bool Board::Stay(int r, int c)
 {
+
     int zero_counter = 0;
     if(PositionExist(r-1,c)&&board[r-1][c]==Empty) zero_counter++;//Up
     if(PositionExist(r+1,c)&&board[r+1][c]==Empty) zero_counter++;//Down
