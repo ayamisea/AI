@@ -16,7 +16,7 @@ bool Game::Initialize()
 
 void Game::Display()
 {
-    b.print();
+    b.Print();
 
 }
 void Game::End()
