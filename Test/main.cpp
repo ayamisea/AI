@@ -22,20 +22,18 @@ int main()
         game.Display();
         game.ShowRemainBrick();
 
-
         std::cout<<"What the brick do you want to take away[row,col]?";
         scanf("%d %d",&row,&col);
 
-        if(game.getBoard().PositionExist(row,col))
-        {
-            game.setP1No(game.getBoard().board[row][col]);
-        }
+        if(game.getBoard().PositionExist(row,col)) game.setP1No(game.getBoard().board[row][col]);
         if(game.Attack(row,col,game.getP1No())==game.getP1No()) std::cout<<"Attack!!\n";
         else std::cout<<"Cannot attack!!\n";
 
         system("pause");
         system("cls");
     }
+    else game.setP1No(1);
+
 
     while(!game.End())
     {

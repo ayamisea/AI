@@ -48,7 +48,6 @@ bool Game::Attack(int row,int col,int pyNo)
 
     if(b.board[r][c]==p1.No) p1.remaining_bricks--;
     else p2.remaining_bricks--;
-    int turn = b.board[r][c];
     b.board[r][c]=0;
 
     int cut=0;
@@ -73,9 +72,20 @@ bool Game::Attack(int row,int col,int pyNo)
         cut++;
     }
 
-    if(turn==p1.No) p2.remaining_bricks-=cut;
-    else p1.remaining_bricks-=cut;
+    Position pos;
+    pos.row = row;
+    pos.col =col;
 
+    if(pyNo == p1.No)
+    {
+        p1.moveRecord.push_back(pos);
+        p2.remaining_bricks-=cut;
+    }
+    else
+    {
+        p2.moveRecord.push_back(pos);
+        p1.remaining_bricks-=cut;
+    }
     return true;
 }
 
