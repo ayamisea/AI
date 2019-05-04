@@ -1,7 +1,6 @@
 #include"board.h"
 #include<limits.h>
 #include <stdlib.h>
-#include<vector>
 #include <time.h>
 #ifndef GAME_H_
 #define GAME_H_
@@ -21,6 +20,7 @@ public:
     int getP1No()const;
     void setMoveRecord(const Position &p,int pyNo);
     void showMoveRecord();
+    void showColor();
 private:
     Board b;
     int p1No=0;

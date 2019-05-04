@@ -48,31 +48,25 @@ int main()
         game.setP1No(rand()%2+1);
     }
 
-
-
-
     while(!game.End())
     {
         game.AIstrategy();
-        std::cin.sync();
 
         do
         {
             system("pause");
             system("cls");
             game.getBoard().Display();
+            game.showColor();
             game.ShowRemainBrick();
 
             std::cout<<"What the brick do you want to take away[row,col]?";
             scanf("%d %d",&pos.row,&pos.col);
         }
         while(!game.getBoard().performMove(pos,game.getP1No()));
-
         std::cout<<"Attack!!\n";
         game.setMoveRecord(pos,game.getP1No());
         game.showMoveRecord();
-
     }
-
     return 0;
 }

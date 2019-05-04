@@ -16,7 +16,7 @@ bool Game::Initialize()
     std::cout<<"Do you want to play first [y/n]?";
     std::cin>>first;
     srand(time(NULL));
-    b.randColor = rand()%2;
+    b.setRandColor(rand()%2);
 
     if(!b.Create()) return false; //Board -> Insufficient memory!
     return true;
@@ -24,10 +24,12 @@ bool Game::Initialize()
 
 bool Game::End()
 {
-    if(b.getRemainBricks(p1No)!=0 && b.getRemainBricks(p2No)!=0) return false;
+    int p1rb = b.getNumRemainBricks(p1No);
+    int p2rb = b.getNumRemainBricks(p2No);
+    if(p1rb!=0 && p2rb!=0) return false;
     b.Delete();
-    if(b.getRemainBricks(p1No)==0&&b.getRemainBricks(p2No)==0) std::cout<<"The game ended in a draw.\n";
-    else if(b.getRemainBricks(p1No)==0) std::cout<<"You win!!\n";
+    if(p1rb == 0 && p2rb == 0) std::cout<<"The game ended in a draw.\n";
+    else if(p1rb == 0) std::cout<<"You win!!\n";
     else std::cout<<"You lose~~\n";
     return true;
 }
@@ -36,7 +38,7 @@ bool Game::End()
 
 void Game::ShowRemainBrick()
 {
-    std::cout<<"Remaining Bricks:"<<" You:"<<b.getRemainBricks(p1No)<<", AI:"<<b.getRemainBricks(p2No)<<"\n\n";
+    std::cout<<"Remaining Bricks:"<<" You:"<<b.getNumRemainBricks(p1No)<<", AI:"<<b.getNumRemainBricks(p2No)<<"\n\n";
 }
 
 void Game::AIstrategy()
@@ -93,3 +95,12 @@ void Game::showMoveRecord()
     std::cout<<"\n";
 }
 
+void Game::showColor()
+{
+    int color = b.getRandColor();
+    std::cout<<"You:";
+    if( (p1No==1 && color ) || (p1No==2 &&!color)) std::cout<<"Red "<<"AI:Blue\n"<<std::endl;
+    else std::cout<<"Blue "<<"AI:Red\n"<<std::endl;
+
+
+}

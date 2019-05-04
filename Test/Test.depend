@@ -1,27 +1,27 @@
 # depslib dependency file v1.0
-1556991639 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
+1556995634 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
 	"game.h"
 
-1556992060 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
+1556995570 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
 	"game.h"
 	<time.h>
 
 1556986826 source:d:\ms\first_year_2\ai\term_project\test\player.cpp
 	"player.h"
 
-1556988368 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
+1556995661 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
 	"board.h"
 
-1556988368 d:\ms\first_year_2\ai\term_project\test\board.h
+1556995761 d:\ms\first_year_2\ai\term_project\test\board.h
 	<iostream>
 	<iomanip>
+	<vector>
 	<windows.h>
 
-1556993248 d:\ms\first_year_2\ai\term_project\test\game.h
+1556995466 d:\ms\first_year_2\ai\term_project\test\game.h
 	"board.h"
 	<limits.h>
 	<stdlib.h>
-	<vector>
 	<time.h>
 
 1556990585 d:\ms\first_year_2\ai\term_project\test\player.h

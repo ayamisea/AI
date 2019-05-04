@@ -13,8 +13,8 @@ void Board::Display()
         {
             if(board[i][j]==1)
             {
-                if(randColor)SetColor(12,0);
-                else SetColor(9,0);
+                if(randColor)SetColor(12,0); //Red
+                else SetColor(9,0); //Blue
             }
             else if(board[i][j]==2)
             {
@@ -27,6 +27,7 @@ void Board::Display()
         std::cout<<"\n";
     }
     SetColor(15,0);
+    std::cout<<"\n";
 }
 
 bool Board::Create()
@@ -122,7 +123,7 @@ bool Board::performMove(const Position &p,int pyNo)
     return true;
 }
 
-int Board::getRemainBricks(int pyNo)const
+int Board::getNumRemainBricks(int pyNo)const
 {
     int counter=0;
     for(int i=0;i<size;++i)
@@ -133,4 +134,22 @@ int Board::getRemainBricks(int pyNo)const
         }
     }
     return counter;
+}
+
+std::vector<Position> Board::getRemainBricks(int pyNo)const
+{
+    std::vector<Position> buffer;
+    for(int i=0;i<size;++i)
+    {
+        for(int j=0;j<size;++j)
+        {
+            if(board[i][j]==pyNo)
+            {
+                Position p;
+                p.row = i;
+                p.col = j;
+                buffer.push_back(p);
+            }
+        }
+    }
 }
