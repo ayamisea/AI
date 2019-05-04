@@ -1,6 +1,6 @@
 #include"player.h"
 
-void Player::Setting (int bricks_)
+void Player::SetNo (int no)
 {
-    remaining_bricks=bricks_;
+    No=no;
 }

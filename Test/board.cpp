@@ -1,6 +1,6 @@
 #include"board.h"
 
-void Board::Print()
+void Board::Display()
 {
     SetColor(15,0);
     for(int i=0;i<size+1;++i) std::cout<<std::setw(4)<<i;
@@ -85,4 +85,52 @@ bool Board::Stay(int r, int c)
 
     if(zero_counter>=2) return false;
     return true;
+}
+
+bool Board::performMove(const Position &p,int pyNo)
+{
+    int r = p.row-1;
+    int c = p.col-1;
+
+    if(!PositionExist(r,c)) return false;
+    if(board[r][c]==0 || board[r][c]!=pyNo) return false;
+
+    board[r][c]=0;
+
+    int cut=0;
+    if(PositionExist(r-1,c)&&board[r-1][c]!=0&&!Stay(r-1,c)) //Check Up
+    {
+        board[r-1][c]=0;
+        cut++;
+    }
+    if(PositionExist(r+1,c)&&board[r+1][c]!=0&&!Stay(r+1,c)) //Check Down
+    {
+        board[r+1][c]=0;
+        cut++;
+    }
+    if(PositionExist(r,c-1)&&board[r][c-1]!=0&&!Stay(r,c-1)) //Check Left
+    {
+        board[r][c-1]=0;
+        cut++;
+    }
+    if(PositionExist(r,c+1)&&board[r][c+1]!=0&&!Stay(r,c+1)) //Check Right
+    {
+        board[r][c+1]=0;
+        cut++;
+    }
+
+    return true;
+}
+
+int Board::getRemainBricks(int pyNo)const
+{
+    int counter=0;
+    for(int i=0;i<size;++i)
+    {
+        for(int j=0;j<size;++j)
+        {
+            if(board[i][j]==pyNo) counter++;
+        }
+    }
+    return counter;
 }

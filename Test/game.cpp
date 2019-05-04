@@ -11,8 +11,8 @@ bool Game::Initialize()
     }
 
     int bricks = b.size*b.size/2;
-    p1.Setting(bricks);
-    p2.Setting(bricks);
+    p1.SetNo(1);
+    p2.SetNo(2);
     std::cout<<"Do you want to play first [y/n]?";
     std::cin>>first;
     srand(time(NULL));
@@ -22,80 +22,39 @@ bool Game::Initialize()
     return true;
 }
 
-void Game::Display()
-{
-    b.Print();
-    std::cout<<"\n"<<"You:red  PC:green\n\n";
-
-}
 bool Game::End()
 {
-    if(p1.remaining_bricks!=0 && p2.remaining_bricks!=0) return false;
+    if(b.getRemainBricks(p1.No)!=0 && b.getRemainBricks(p2.No)!=0) return false;
     b.Delete();
-    if(p1.remaining_bricks==0&&p2.remaining_bricks==0) std::cout<<"The game ended in a draw.\n";
-    else if(p1.remaining_bricks==0) std::cout<<"You win!!\n";
+    if(b.getRemainBricks(p1.No)==0&&b.getRemainBricks(p2.No)==0) std::cout<<"The game ended in a draw.\n";
+    else if(b.getRemainBricks(p1.No)==0) std::cout<<"You win!!\n";
     else std::cout<<"You lose~~\n";
     return true;
 }
 
-bool Game::Attack(int row,int col,int pyNo)
-{
-    int r = row-1;
-    int c = col-1;
 
-    if(!b.PositionExist(r,c)) return false;
-    if(b.board[r][c]==0 || b.board[r][c]!=pyNo) return false;
-
-    if(b.board[r][c]==p1.No) p1.remaining_bricks--;
-    else p2.remaining_bricks--;
-    b.board[r][c]=0;
-
-    int cut=0;
-    if(b.PositionExist(r-1,c)&&b.board[r-1][c]!=0&&!b.Stay(r-1,c)) //Check Up
-    {
-        b.board[r-1][c]=0;
-        cut++;
-    }
-    if(b.PositionExist(r+1,c)&&b.board[r+1][c]!=0&&!b.Stay(r+1,c)) //Check Down
-    {
-        b.board[r+1][c]=0;
-        cut++;
-    }
-    if(b.PositionExist(r,c-1)&&b.board[r][c-1]!=0&&!b.Stay(r,c-1)) //Check Left
-    {
-        b.board[r][c-1]=0;
-        cut++;
-    }
-    if(b.PositionExist(r,c+1)&&b.board[r][c+1]!=0&&!b.Stay(r,c+1)) //Check Right
-    {
-        b.board[r][c+1]=0;
-        cut++;
-    }
-
-    Position pos;
-    pos.row = row;
-    pos.col =col;
-
-    if(pyNo == p1.No)
-    {
-        p1.moveRecord.push_back(pos);
-        p2.remaining_bricks-=cut;
-    }
-    else
-    {
-        p2.moveRecord.push_back(pos);
-        p1.remaining_bricks-=cut;
-    }
-    return true;
-}
 
 void Game::ShowRemainBrick()
 {
-    std::cout<<"Remaining Bricks:"<<" You:"<<p1.remaining_bricks<<", AI:"<<p2.remaining_bricks<<"\n\n";
+    std::cout<<"Remaining Bricks:"<<" You:"<<b.getRemainBricks(p1.No)<<", AI:"<<b.getRemainBricks(p2.No)<<"\n\n";
 }
 
 void Game::AIstrategy()
 {
+    Position pos;
+    do
+    {
+        system("pause");
+        system("cls");
+        b.Display();
+        ShowRemainBrick();
+
+        std::cout<<"AI attack [row,col]?";
+        scanf("%d %d",&pos.row,&pos.col);
+
+    }
+    while(!getBoard().performMove(pos,p2.No));
+    std::cout<<"AI Attack!!\n";
 
 }
 
@@ -105,8 +64,8 @@ Board Game::getBoard()const
 }
 void Game::setP1No(int no)
 {
-    p1.No=no;
-    p2.No=3 - no;
+    p1.SetNo(no);
+    p2.SetNo(3 - no);
 }
 int Game::getP1No()const
 {

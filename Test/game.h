@@ -12,7 +12,6 @@ public:
     bool Initialize();
     void Display();
     bool End();
-    bool Attack(int row,int col,int pyNo); //return who attacks
     void ShowRemainBrick();
     void AIstrategy();
     std::string first;
