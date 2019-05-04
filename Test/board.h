@@ -17,7 +17,7 @@ class Board
       void Delete();
       bool PositionExist(int r,int c);
       bool Stay(int r,int c);
-      enum State{Empty,You,AI};
+      int randColor=1;
   private:
       void SetColor(int font,int background);
 

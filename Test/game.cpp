@@ -11,8 +11,12 @@ bool Game::Initialize()
     }
 
     int bricks = b.size*b.size/2;
-    p1.Setting(bricks,b.You);
-    p2.Setting(bricks,b.AI);
+    p1.Setting(bricks);
+    p2.Setting(bricks);
+    std::cout<<"Do you want to play first [y/n]?";
+    std::cin>>first;
+    srand(time(NULL));
+    b.randColor = rand()%2;
 
     if(!b.Create()) return false; //Board -> Insufficient memory!
     return true;
@@ -34,42 +38,42 @@ bool Game::End()
     return true;
 }
 
-bool Game::Attack(int row,int col)
+bool Game::Attack(int row,int col,int pyNo)
 {
     int r = row-1;
     int c = col-1;
 
     if(!b.PositionExist(r,c)) return false;
-    if(b.board[r][c]==b.Empty) return false;
+    if(b.board[r][c]==0 || b.board[r][c]!=pyNo) return false;
 
-    if(b.board[r][c]==b.You) p1.remaining_bricks--;
+    if(b.board[r][c]==p1.No) p1.remaining_bricks--;
     else p2.remaining_bricks--;
     int turn = b.board[r][c];
-    b.board[r][c]=b.Empty;
+    b.board[r][c]=0;
 
     int cut=0;
-    if(b.PositionExist(r-1,c)&&b.board[r-1][c]!=b.Empty&&!b.Stay(r-1,c)) //Check Up
+    if(b.PositionExist(r-1,c)&&b.board[r-1][c]!=0&&!b.Stay(r-1,c)) //Check Up
     {
-        b.board[r-1][c]=b.Empty;
+        b.board[r-1][c]=0;
         cut++;
     }
-    if(b.PositionExist(r+1,c)&&b.board[r+1][c]!=b.Empty&&!b.Stay(r+1,c)) //Check Down
+    if(b.PositionExist(r+1,c)&&b.board[r+1][c]!=0&&!b.Stay(r+1,c)) //Check Down
     {
-        b.board[r+1][c]=b.Empty;
+        b.board[r+1][c]=0;
         cut++;
     }
-    if(b.PositionExist(r,c-1)&&b.board[r][c-1]!=b.Empty&&!b.Stay(r,c-1)) //Check Left
+    if(b.PositionExist(r,c-1)&&b.board[r][c-1]!=0&&!b.Stay(r,c-1)) //Check Left
     {
-        b.board[r][c-1]=b.Empty;
+        b.board[r][c-1]=0;
         cut++;
     }
-    if(b.PositionExist(r,c+1)&&b.board[r][c+1]!=b.Empty&&!b.Stay(r,c+1)) //Check Right
+    if(b.PositionExist(r,c+1)&&b.board[r][c+1]!=0&&!b.Stay(r,c+1)) //Check Right
     {
-        b.board[r][c+1]=b.Empty;
+        b.board[r][c+1]=0;
         cut++;
     }
 
-    if(turn==b.You) p2.remaining_bricks-=cut;
+    if(turn==p1.No) p2.remaining_bricks-=cut;
     else p1.remaining_bricks-=cut;
 
     return true;
@@ -83,4 +87,18 @@ void Game::ShowRemainBrick()
 void Game::AIstrategy()
 {
 
+}
+
+Board Game::getBoard()const
+{
+    return b;
+}
+void Game::setP1No(int no)
+{
+    p1.No=no;
+    p2.No=3 - no;
+}
+int Game::getP1No()const
+{
+    return p1.No;
 }
