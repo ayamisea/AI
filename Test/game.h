@@ -1,6 +1,7 @@
-#include"player.h"
+#include"board.h"
 #include<limits.h>
 #include <stdlib.h>
+#include<vector>
 #include <time.h>
 #ifndef GAME_H_
 #define GAME_H_
@@ -18,10 +19,14 @@ public:
     Board getBoard()const;
     void setP1No(int no);
     int getP1No()const;
+    void setMoveRecord(const Position &p,int pyNo);
+    void showMoveRecord();
 private:
     Board b;
-    Player p1;
-    Player p2; //ai
+    int p1No=0;
+    int p2No=0; //ai
+    std::vector<Position> p1moveRecord;
+    std::vector<Position> p2moveRecord;
 
 };
 #endif // GAME_H_

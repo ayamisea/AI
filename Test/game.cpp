@@ -11,8 +11,8 @@ bool Game::Initialize()
     }
 
     int bricks = b.size*b.size/2;
-    p1.SetNo(1);
-    p2.SetNo(2);
+    p1No = 1;
+    p2No = 2;
     std::cout<<"Do you want to play first [y/n]?";
     std::cin>>first;
     srand(time(NULL));
@@ -24,10 +24,10 @@ bool Game::Initialize()
 
 bool Game::End()
 {
-    if(b.getRemainBricks(p1.No)!=0 && b.getRemainBricks(p2.No)!=0) return false;
+    if(b.getRemainBricks(p1No)!=0 && b.getRemainBricks(p2No)!=0) return false;
     b.Delete();
-    if(b.getRemainBricks(p1.No)==0&&b.getRemainBricks(p2.No)==0) std::cout<<"The game ended in a draw.\n";
-    else if(b.getRemainBricks(p1.No)==0) std::cout<<"You win!!\n";
+    if(b.getRemainBricks(p1No)==0&&b.getRemainBricks(p2No)==0) std::cout<<"The game ended in a draw.\n";
+    else if(b.getRemainBricks(p1No)==0) std::cout<<"You win!!\n";
     else std::cout<<"You lose~~\n";
     return true;
 }
@@ -36,12 +36,14 @@ bool Game::End()
 
 void Game::ShowRemainBrick()
 {
-    std::cout<<"Remaining Bricks:"<<" You:"<<b.getRemainBricks(p1.No)<<", AI:"<<b.getRemainBricks(p2.No)<<"\n\n";
+    std::cout<<"Remaining Bricks:"<<" You:"<<b.getRemainBricks(p1No)<<", AI:"<<b.getRemainBricks(p2No)<<"\n\n";
 }
 
 void Game::AIstrategy()
 {
     Position pos;
+
+    //Case input
     do
     {
         system("pause");
@@ -53,8 +55,13 @@ void Game::AIstrategy()
         scanf("%d %d",&pos.row,&pos.col);
 
     }
-    while(!getBoard().performMove(pos,p2.No));
+    while(!getBoard().performMove(pos,p2No));
+
+    //uniform cost
+
+
     std::cout<<"AI Attack!!\n";
+    setMoveRecord(pos,p2No);
 
 }
 
@@ -64,10 +71,25 @@ Board Game::getBoard()const
 }
 void Game::setP1No(int no)
 {
-    p1.SetNo(no);
-    p2.SetNo(3 - no);
+    p1No = no;
+    p2No = 3 - no;
 }
 int Game::getP1No()const
 {
-    return p1.No;
+    return p1No;
 }
+void Game::setMoveRecord(const Position &p,int pyNo)
+{
+    if(pyNo==p1No) p1moveRecord.push_back(p);
+    else if(pyNo==p2No) p2moveRecord.push_back(p);
+}
+
+void Game::showMoveRecord()
+{
+    std::cout<<"Your move:";
+    for(auto &i : p1moveRecord) std::cout <<"<"<<i.row<<","<<i.col<<"> ";
+    std::cout<<"\nAI move:";
+    for(auto &i : p2moveRecord) std::cout <<"<"<<i.row<<","<<i.col<<"> ";
+    std::cout<<"\n";
+}
+
