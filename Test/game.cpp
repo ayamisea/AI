@@ -17,8 +17,8 @@ bool Game::Initialize()
     std::cin>>first;
     srand(time(NULL));
     b.setRandColor(rand()%2);
+    b.Create();
 
-    if(!b.Create()) return false; //Board -> Insufficient memory!
     return true;
 }
 
@@ -30,7 +30,7 @@ bool Game::End()
     else if(b.checkStatus(p1No)==b.WIN) std::cout<<"You win!!\n";
     else std::cout<<"You lose~~\n";
 
-     b.Delete();
+    // b.Delete();
     return true;
 }
 
@@ -45,7 +45,7 @@ void Game::AIstrategy()
 {
     Position pos;
 
-    //Case input
+    /***Case input
     do
     {
         system("pause");
@@ -59,7 +59,14 @@ void Game::AIstrategy()
     }
     while(!getBoard().performMove(pos,p2No));
 
+    ***/
     //uniform cost
+
+
+    //MCTS
+
+    m.findNextMove(b,p2No);
+
 
 
     std::cout<<"AI Attack!!\n";
@@ -67,7 +74,7 @@ void Game::AIstrategy()
 
 }
 
-Board Game::getBoard()const
+Board& Game::getBoard()
 {
     return b;
 }

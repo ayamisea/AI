@@ -1,33 +1,9 @@
-#include "game.h"
+#include"game.h"
+#include "mcts.h"
 
-#include"tree.h"
 #include<time.h>
 int main()
 {
-
-    //Test
-
-    Node node;
-    node.id=10;
-    Node p;
-    p.id=11;
-    Node c;
-    c.id = 12;
-    Tree t;
-
-    t.addChild(node,c);
-    node.childArray[0].id = 200;
-    std::cout<<node.childArray[0].parenet<<" ";
-    std::cout<<&node<<" ";
-
-    t.setRoot(node);
-    std::cout<<&t.root.childArray[0].parenet<<" ";
-
-
-    return 0;
-    //
-
-
     int n =1;
     Game game;
     if(!game.Initialize())

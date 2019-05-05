@@ -38,6 +38,12 @@
 		<Unit filename="game.cpp" />
 		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mcts.cpp" />
+		<Unit filename="mcts.h" />
+		<Unit filename="state.cpp" />
+		<Unit filename="state.h" />
+		<Unit filename="tree.cpp" />
+		<Unit filename="tree.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

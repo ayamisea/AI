@@ -1,26 +1,27 @@
 # depslib dependency file v1.0
-1557034780 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
+1557068655 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
 	"game.h"
 
-1557045320 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
+1557050525 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
 	"game.h"
-	"tree.h"
+	"mcts.h"
 	<time.h>
 
 1556986826 source:d:\ms\first_year_2\ai\term_project\test\player.cpp
 	"player.h"
 
-1557034583 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
+1557066313 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
 	"board.h"
 
-1557034771 d:\ms\first_year_2\ai\term_project\test\board.h
+1557066533 d:\ms\first_year_2\ai\term_project\test\board.h
 	<iostream>
 	<iomanip>
 	<vector>
 	<windows.h>
 
-1556995466 d:\ms\first_year_2\ai\term_project\test\game.h
+1557066829 d:\ms\first_year_2\ai\term_project\test\game.h
 	"board.h"
+	"mcts.h"
 	<limits.h>
 	<stdlib.h>
 	<time.h>
@@ -33,13 +34,23 @@
 1557038417 source:d:\ms\first_year_2\ai\term_project\test\state.cpp
 	"state.h"
 
-1557038403 d:\ms\first_year_2\ai\term_project\test\state.h
+1557067268 d:\ms\first_year_2\ai\term_project\test\state.h
 	"board.h"
 	<limits.h>
 
 1557046591 source:d:\ms\first_year_2\ai\term_project\test\tree.cpp
 	"tree.h"
 
-1557046691 d:\ms\first_year_2\ai\term_project\test\tree.h
+1557068594 d:\ms\first_year_2\ai\term_project\test\tree.h
 	"state.h"
+
+1557070090 d:\ms\first_year_2\ai\term_project\test\mcts.h
+	"board.h"
+	"tree.h"
+	<math.h>
+	<sys/time.h>
+	<time.h>
+
+1557069299 source:d:\ms\first_year_2\ai\term_project\test\mcts.cpp
+	"mcts.h"
 

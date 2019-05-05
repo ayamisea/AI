@@ -5,7 +5,6 @@
 
 struct Node
 {
-    int id;
     State state;
     Node *parenet;
     std::vector<Node> childArray;
@@ -19,7 +18,7 @@ public:
     Node root;
     Tree(const Node& r){root=r;}
     void setRoot(const Node& r) { root = r; }
-    Node getRoot()const{return root;}
+    Node& getRoot(){return root;}
     void addChild(Node& parent, Node& child);
 
 

@@ -17,10 +17,10 @@ class Board
       Board(int size){};
 
       int size = 4;
-      int** board = NULL;
+      int board[10][10]={{0}};
       bool Create();
       void Display();
-      void Delete();
+      //void Delete();
       bool PositionExist(int r,int c);
       void setRandColor(int rc){randColor=rc;}
       int getRandColor() const {return randColor;}

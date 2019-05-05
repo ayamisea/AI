@@ -32,6 +32,7 @@ void Board::Display()
 
 bool Board::Create()
 {
+    /*
     try
     {
         board = new int*[size];
@@ -40,7 +41,7 @@ bool Board::Create()
     catch(std::bad_alloc) {return false;}
 
     if(board)
-    {
+    {*/
         for(int i=0;i<size;++i)
         {
             for(int j=0;j<size;++j)
@@ -49,18 +50,19 @@ bool Board::Create()
                 else board[i][j]=2;
             }
         }
+        /*
         return true;
     }
-    return false;
+    return false;*/
 }
-
+/*
 void Board::Delete()
 {
     for(int i=0; i<size;++i) delete [] board[i];
     delete [] board;
     board=NULL;
 }
-
+*/
 void Board::SetColor(int font,int background)
 {
     unsigned short color=font+16*background;
@@ -146,12 +148,13 @@ std::vector<Position> Board::getRemainBricks(int pyNo)const
             if(board[i][j]==pyNo)
             {
                 Position p;
-                p.row = i;
-                p.col = j;
+                p.row = i+1;
+                p.col = j+1;
                 buffer.push_back(p);
             }
         }
     }
+    return buffer;
 }
 
 int Board::checkStatus(int pyNo)

@@ -11,11 +11,11 @@ public:
     ~State(){};
     State(const Board &board){b=board;}
 
-    Board getBoard()const {return b;}
+    Board& getBoard() {return b;}
     void setBoard(const Board &board) {b = board;}
     int getPlayerNo()const {return pyNo;}
     void setPlayerNo(const int &playerNo){pyNo=playerNo;}
-    int getOpponent(int pyNo)const {return 3-pyNo;}
+    int getOpponent()const {return 3-pyNo;}
     int getVisitCount()const{return visitCount;}
     void setVisitCount(const int &vc){visitCount = vc;}
     double getWinScore()const{return winScore;}

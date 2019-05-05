@@ -1,4 +1,5 @@
 #include"board.h"
+#include"mcts.h"
 #include<limits.h>
 #include <stdlib.h>
 #include <time.h>
@@ -15,14 +16,16 @@ public:
     void ShowRemainBrick();
     void AIstrategy();
     std::string first;
-    Board getBoard()const;
+    Board& getBoard();
     void setP1No(int no);
     int getP1No()const;
     void setMoveRecord(const Position &p,int pyNo);
     void showMoveRecord();
     void showColor();
+
 private:
     Board b;
+    MCTS m;
     int p1No=0;
     int p2No=0; //ai
     std::vector<Position> p1moveRecord;
