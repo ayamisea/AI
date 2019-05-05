@@ -24,13 +24,13 @@ bool Game::Initialize()
 
 bool Game::End()
 {
-    int p1rb = b.getNumRemainBricks(p1No);
-    int p2rb = b.getNumRemainBricks(p2No);
-    if(p1rb!=0 && p2rb!=0) return false;
-    b.Delete();
-    if(p1rb == 0 && p2rb == 0) std::cout<<"The game ended in a draw.\n";
-    else if(p1rb == 0) std::cout<<"You win!!\n";
+    if(b.checkStatus(p1No)==b.IN_PROGRESS) return false;
+
+    if(b.checkStatus(p1No)==b.DRAW) std::cout<<"The game ended in a draw.\n";
+    else if(b.checkStatus(p1No)==b.WIN) std::cout<<"You win!!\n";
     else std::cout<<"You lose~~\n";
+
+     b.Delete();
     return true;
 }
 
@@ -101,6 +101,5 @@ void Game::showColor()
     std::cout<<"You:";
     if( (p1No==1 && color ) || (p1No==2 &&!color)) std::cout<<"Red "<<"AI:Blue\n"<<std::endl;
     else std::cout<<"Blue "<<"AI:Red\n"<<std::endl;
-
 
 }

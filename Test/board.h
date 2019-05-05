@@ -27,6 +27,8 @@ class Board
       bool performMove(const Position &p,int pyNo);
       int getNumRemainBricks(int pyNo)const;
       std::vector<Position> getRemainBricks(int pyNo)const;
+      enum Status{DRAW,WIN,LOSE,IN_PROGRESS};
+      int checkStatus(int pyNo);
 
   private:
       void SetColor(int font,int background);

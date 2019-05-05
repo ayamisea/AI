@@ -9,10 +9,10 @@
 1556986826 source:d:\ms\first_year_2\ai\term_project\test\player.cpp
 	"player.h"
 
-1556995661 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
+1557034583 source:d:\ms\first_year_2\ai\term_project\test\board.cpp
 	"board.h"
 
-1556995761 d:\ms\first_year_2\ai\term_project\test\board.h
+1557034771 d:\ms\first_year_2\ai\term_project\test\board.h
 	<iostream>
 	<iomanip>
 	<vector>

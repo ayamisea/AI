@@ -153,3 +153,14 @@ std::vector<Position> Board::getRemainBricks(int pyNo)const
         }
     }
 }
+
+int Board::checkStatus(int pyNo)
+{
+    int opponent = 3-pyNo;
+    int pBricks = getNumRemainBricks(pyNo);
+    int oBricks = getNumRemainBricks(opponent);
+    if(pBricks!=0 && oBricks!=0) return IN_PROGRESS;
+    if(pBricks == 0 && oBricks == 0) return DRAW;
+    else if(pBricks == 0) return WIN;
+    else return LOSE;
+}
