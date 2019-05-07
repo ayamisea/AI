@@ -64,12 +64,11 @@ void Game::AIstrategy()
 
 
     //MCTS
+    pos = m.findNextMove(b,p2No);
+    b.performMove(pos,p2No);
+    setMoveRecord(pos,p2No);
 
-    m.findNextMove(b,p2No);
-
-
-
-    std::cout<<"AI Attack!!\n";
+    std::cout<<"AI Attack!! <"<<pos.row<<","<<pos.col<<">\n";
     //setMoveRecord(pos,p2No);
 
 }

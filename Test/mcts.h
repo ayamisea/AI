@@ -11,7 +11,7 @@ class MCTS
 public:
     int getLevel()const{return level;}
     void setLevel(const int l){level =l;}
-    Board findNextMove(const Board &b,int plNo);
+    Position findNextMove(const Board &b,int plNo);
 
 private:
     int WIN_SCORE = 10;
@@ -21,7 +21,7 @@ private:
     Node* selectPromisingNode(Node& n);
     void expandNode(Node* node);
     void backPropogation(Node* nodeToExplore,int pyNo);
-    int simulateRandomPlayout(const Node* node);
+    int simulateRandomPlayout(Node* node);
     long long currentTimeMillis();
 
     //UCT

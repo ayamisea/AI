@@ -16,6 +16,7 @@ void State::randomPlay()
     srand(time(NULL));
     int selectRandom= rand()%totalSize;
     b.performMove(availablePositions[selectRandom],pyNo);
+    pos=availablePositions[selectRandom];
 
 }
 

@@ -54,6 +54,7 @@ int main()
     {
         game.AIstrategy();
 
+        if(game.End())break;
         do
         {
             system("pause");

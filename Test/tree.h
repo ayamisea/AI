@@ -17,7 +17,7 @@ public:
     ~Tree(){};
     Node root;
     Tree(const Node& r){root=r;}
-    void setRoot(const Node* r) { root = *r; }
+    void setRoot(Node* r) { root = *r; }
     Node& getRoot(){return root;}
     void addChild(Node& parent, Node& child);
 
