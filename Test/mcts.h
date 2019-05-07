@@ -18,14 +18,14 @@ private:
     int level = 3;
     int opponent;
     int getMillisForCurrentLevel();
-    Node selectPromisingNode(const Node &rootNode);
-    void expandNode(Node &node);
-    void backPropogation(Node &nodeToExplore,int pyNo);
-    int simulateRandomPlayout(Node &node);
+    Node* selectPromisingNode(Node& n);
+    void expandNode(Node* node);
+    void backPropogation(Node* nodeToExplore,int pyNo);
+    int simulateRandomPlayout(Node* node);
     long long currentTimeMillis();
 
     //UCT
-    Node findBestNodeWithUCT(const Node &n);
+    Node* findBestNodeWithUCT(Node* n);
     double uctValue(int totalVisit,double nodeWinScore,int nodeVisit);
 };
 #endif // MCTS_H_

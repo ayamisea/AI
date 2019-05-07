@@ -70,7 +70,7 @@ void Game::AIstrategy()
 
 
     std::cout<<"AI Attack!!\n";
-    setMoveRecord(pos,p2No);
+    //setMoveRecord(pos,p2No);
 
 }
 

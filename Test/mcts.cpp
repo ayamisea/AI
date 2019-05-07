@@ -23,19 +23,30 @@ Board MCTS::findNextMove(const Board &b,int pyNo)
     while(counter<2)
     {
         //Section
-        Node promisingNode = selectPromisingNode(tree.getRoot());
+
+        Node* promisingNode = selectPromisingNode(tree.getRoot());
+
+        //std::cout<<&tree.getRoot()<<" "<<promisingNode;
 
         //Expansion
 
-        if(promisingNode.state.getBoard().checkStatus(pyNo)==promisingNode.state.getBoard().IN_PROGRESS)
+        if(promisingNode->state.getBoard().checkStatus(pyNo)==promisingNode->state.getBoard().IN_PROGRESS)
         {
 
             expandNode(promisingNode);
         }
 
+        for(auto const& n :promisingNode->childArray)
+        {
+            std::cout<<n->state.getPosition().row<<" "<<n->state.getPosition().col<<"\n";
+            n->state.getBoard().Display();
+            system("pause");
+            system("cls");
+        }
+/*
         //Simulation
-        Node nodeToExplore;
-        if(promisingNode.childArray.size() > 0)
+        Node* nodeToExplore;
+        if(promisingNode->childArray.size() > 0)
         {
             nodeToExplore = tree.getRandomChildNode(promisingNode);
 
@@ -47,71 +58,77 @@ Board MCTS::findNextMove(const Board &b,int pyNo)
 
         //std::cout<<promisingNode.childArray.size()<<"****";
 
-        counter ++;
+
         system("pause");
         system("cls");
-    }
-    Node winnerNode = tree.getChildWithMaxScore(tree.getRoot());
+        */
+
+        counter ++;
+        }
+
+    /*
+    Node* winnerNode = tree.getChildWithMaxScore(tree.getRoot());
     tree.setRoot(winnerNode);
 
     std::cout<<tree.getRoot().childArray.size()<<"***";
     system("pause");
     system("cls");
 
-    return winnerNode.state.getBoard();
+    return winnerNode->state.getBoard();
+    */
+
 }
 
-Node MCTS::selectPromisingNode(const Node &rootNode)
+Node* MCTS::selectPromisingNode(Node &n)
 {
-    Node node = rootNode;
-    while(node.childArray.size() != 0)
+    Node* node = &n;
+    while(node->childArray.size() != 0)
     {
         node = findBestNodeWithUCT(node);
-        std::cout<<"**dddd";
     }
     return node;
 
 }
-void MCTS::expandNode(Node &node)
+
+void MCTS::expandNode(Node* node)
 {
     //getAllPossibleStates()
-    int No=node.state.getOpponent();
+    int No=node->state.getOpponent();
     std::vector<State> possibleStates;
-    std::vector<Position> availavlePositions = node.state.getBoard().getRemainBricks(No);
+    std::vector<Position> availavlePositions = node->state.getBoard().getRemainBricks(No);
 
     //Position
 
-    Board b=node.state.getBoard();
+    Board b=node->state.getBoard();
     for(auto const& pos:availavlePositions)
     {
         State newState;
         newState.setBoard(b);
         newState.setPlayerNo(No);
+        newState.setPosition(pos);
         newState.getBoard().performMove(pos,No);
         possibleStates.push_back(newState);
     }
+
 
     //getPossibleStates
 
     for(auto const& s:possibleStates)
     {
-        Node newNode;
-        newNode.state=s;
-        newNode.parenet=&node;
-        newNode.state.setPlayerNo(No);
-        node.childArray.push_back(newNode);
-
-
-        node.childArray.back().state.getBoard().Display();
-
+        Node* newNode = new Node{};
+        newNode->state=s;
+        newNode->parenet=node;
+        newNode->state.setPlayerNo(No);
+        node->childArray.push_back(newNode);
     }
 
+
 }
-void MCTS::backPropogation(Node &nodeToExplore,int pyNo)
+void MCTS::backPropogation(Node* nodeToExplore,int pyNo)
 {
 
 }
-int MCTS::simulateRandomPlayout(Node &node)
+int MCTS::simulateRandomPlayout(Node* node)
 {
 
 }
@@ -126,15 +143,15 @@ long long MCTS::currentTimeMillis()
     return t;
 }
 
-Node MCTS::findBestNodeWithUCT(const Node &n)
+Node* MCTS::findBestNodeWithUCT( Node* n)
 {
-    int parentVisit = n.state.getVisitCount();
+    int parentVisit = n->state.getVisitCount();
 
-    Node maxNode;
+    Node* maxNode;
     double max_UCT=0.0;
-    for(auto const& node: n.childArray)
+    for(auto & node: n->childArray)
     {
-        double uct=uctValue(parentVisit,node.state.getWinScore(),node.state.getVisitCount());
+        double uct=uctValue(parentVisit,node->state.getWinScore(),node->state.getVisitCount());
         if (uct>=max_UCT) maxNode = node;
     }
     return maxNode;

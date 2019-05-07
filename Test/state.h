@@ -13,6 +13,9 @@ public:
 
     Board& getBoard() {return b;}
     void setBoard(const Board &board) {b = board;}
+    Position getPosition ()const { return pos;}
+    void setPosition(const Position &p) {pos = p;}
+
     int getPlayerNo()const {return pyNo;}
     void setPlayerNo(const int &playerNo){pyNo=playerNo;}
     int getOpponent()const {return 3-pyNo;}
@@ -31,6 +34,7 @@ private:
     int pyNo;
     int visitCount=0;
     int winScore=0;
+    Position pos;
 
 };
 #endif // STATE_H_

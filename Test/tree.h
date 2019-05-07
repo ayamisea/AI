@@ -7,7 +7,7 @@ struct Node
 {
     State state;
     Node *parenet;
-    std::vector<Node> childArray;
+    std::vector<Node*> childArray ;
 };
 class Tree
 {
@@ -17,14 +17,14 @@ public:
     ~Tree(){};
     Node root;
     Tree(const Node& r){root=r;}
-    void setRoot(const Node& r) { root = r; }
+    void setRoot(const Node* r) { root = *r; }
     Node& getRoot(){return root;}
     void addChild(Node& parent, Node& child);
 
 
     //Deal with Node
-    Node getRandomChildNode(const Node &n) const ;
-    Node getChildWithMaxScore(const Node &n) const ;
+    Node* getRandomChildNode(Node* n) const ;
+    Node* getChildWithMaxScore(Node& n)  ;
 
 private:
 
