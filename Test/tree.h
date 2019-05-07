@@ -23,7 +23,7 @@ public:
 
 
     //Deal with Node
-    Node* getRandomChildNode(Node* n) const ;
+    Node* getRandomChildNode(Node* n);
     Node* getChildWithMaxScore(Node& n)  ;
 
 private:

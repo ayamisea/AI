@@ -21,7 +21,7 @@ private:
     Node* selectPromisingNode(Node& n);
     void expandNode(Node* node);
     void backPropogation(Node* nodeToExplore,int pyNo);
-    int simulateRandomPlayout(Node* node);
+    int simulateRandomPlayout(const Node* node);
     long long currentTimeMillis();
 
     //UCT

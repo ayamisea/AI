@@ -6,7 +6,7 @@ void Tree::addChild(Node& parent,Node& child)
 
 }
 
-Node* Tree::getRandomChildNode(Node* n)const
+Node* Tree::getRandomChildNode(Node* n)
 {
     int noOfPossibleMoves = n->childArray.size();
     srand(time(NULL));

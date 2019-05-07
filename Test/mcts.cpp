@@ -15,12 +15,13 @@ Board MCTS::findNextMove(const Board &b,int pyNo)
 
     Tree tree;
     //Node rootNode = tree.getRoot();
+    tree.getRoot().parenet = NULL;
     tree.getRoot().state.setBoard(b);
     tree.getRoot().state.setPlayerNo(opponent);
 
     //while(currentTimeMillis() < end_)
     int counter=0;
-    while(counter<2)
+    while(counter<8)
     {
         //Section
 
@@ -36,6 +37,7 @@ Board MCTS::findNextMove(const Board &b,int pyNo)
             expandNode(promisingNode);
         }
 
+        /*
         for(auto const& n :promisingNode->childArray)
         {
             std::cout<<n->state.getPosition().row<<" "<<n->state.getPosition().col<<"\n";
@@ -43,7 +45,8 @@ Board MCTS::findNextMove(const Board &b,int pyNo)
             system("pause");
             system("cls");
         }
-/*
+        */
+
         //Simulation
         Node* nodeToExplore;
         if(promisingNode->childArray.size() > 0)
@@ -53,6 +56,11 @@ Board MCTS::findNextMove(const Board &b,int pyNo)
         }
         int playoutResult = simulateRandomPlayout(nodeToExplore);
 
+        if(playoutResult==opponent) std::cout<<"We Lose...\n";
+        if(playoutResult==0) std::cout<<"DRAW\n";
+        if(playoutResult==pyNo) std::cout<<"We Win.\n";
+
+/*
         //Update
         backPropogation(nodeToExplore,playoutResult);
 
@@ -98,7 +106,6 @@ void MCTS::expandNode(Node* node)
     std::vector<Position> availavlePositions = node->state.getBoard().getRemainBricks(No);
 
     //Position
-
     Board b=node->state.getBoard();
     for(auto const& pos:availavlePositions)
     {
@@ -110,9 +117,7 @@ void MCTS::expandNode(Node* node)
         possibleStates.push_back(newState);
     }
 
-
     //getPossibleStates
-
     for(auto const& s:possibleStates)
     {
         Node* newNode = new Node{};
@@ -122,15 +127,39 @@ void MCTS::expandNode(Node* node)
         node->childArray.push_back(newNode);
     }
 
-
 }
 void MCTS::backPropogation(Node* nodeToExplore,int pyNo)
 {
 
 }
-int MCTS::simulateRandomPlayout(Node* node)
+int MCTS::simulateRandomPlayout(const Node* node)
 {
+    Node* tempNode = (new Node(*node));
+    State tempState = tempNode->state;
+    int boardStatus = tempState.getBoard().checkStatus(opponent);
+    int opWin = tempState.getBoard().WIN;
+    int in_progress=tempState.getBoard().IN_PROGRESS;
+    int draw = tempState.getBoard().DRAW;
 
+    if(boardStatus == opWin)
+    {
+        tempNode->parenet->state.setWinScore(INT_MIN);
+        return opponent;
+    }
+    while(boardStatus == in_progress)
+    {
+        tempState.togglePlayer();
+        tempState.randomPlay();
+        boardStatus = tempState.getBoard().checkStatus(opponent);
+        tempState.getBoard().Display();
+
+        system("pause");
+        system("cls");
+    }
+
+    if(boardStatus == opWin) return opponent;
+    else if(boardStatus == draw) return draw;
+    return 3 - opponent;
 }
 
 long long MCTS::currentTimeMillis()
@@ -148,7 +177,7 @@ Node* MCTS::findBestNodeWithUCT( Node* n)
     int parentVisit = n->state.getVisitCount();
 
     Node* maxNode;
-    double max_UCT=0.0;
+    double max_UCT=INT_MIN;
     for(auto & node: n->childArray)
     {
         double uct=uctValue(parentVisit,node->state.getWinScore(),node->state.getVisitCount());
