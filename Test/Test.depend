@@ -2,7 +2,7 @@
 1557218865 source:d:\ms\first_year_2\ai\term_project\test\game.cpp
 	"game.h"
 
-1557219146 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
+1557221011 source:d:\ms\first_year_2\ai\term_project\test\main.cpp
 	"game.h"
 	"mcts.h"
 	<time.h>

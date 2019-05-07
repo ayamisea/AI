@@ -23,26 +23,18 @@ int main()
         game.getBoard().Display();
         game.ShowRemainBrick();
 
-        std::cout<<"What the brick do you want to take away[row,col]?";
-        scanf("%d %d",&pos.row,&pos.col);
-
-        while(!game.getBoard().PositionExist(pos.row,pos.col))
+        do
         {
-            std::cout<<"Over Board!\n";
             std::cout<<"What the brick do you want to take away[row,col]?";
             scanf("%d %d",&pos.row,&pos.col);
+
         }
-        game.setP1No(game.getBoard().board[pos.row][pos.col]);
-        if(game.getBoard().performMove(pos,game.getP1No()))
-        {
-            std::cout<<"Attack!!\n";
-            game.setMoveRecord(pos,game.getP1No());
-        }
-        else
-        {
-            std::cout<<"Cannot attack!!\n";
-            return 0;
-        }
+        while(!game.getBoard().PositionExist(pos.row-1,pos.col-1));
+
+        game.setP1No(game.getBoard().board[pos.row-1][pos.col-1]);
+        game.getBoard().performMove(pos,game.getP1No());
+        std::cout<<"Attack!!\n";
+        game.setMoveRecord(pos,game.getP1No());
     }
     else
     {
