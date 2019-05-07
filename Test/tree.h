@@ -6,7 +6,7 @@
 struct Node
 {
     State state;
-    Node *parenet;
+    Node *parenet=NULL;
     std::vector<Node*> childArray ;
 };
 class Tree

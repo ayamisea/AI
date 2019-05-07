@@ -26,6 +26,8 @@ bool Game::End()
 {
     if(b.checkStatus(p1No)==b.IN_PROGRESS) return false;
 
+    b.Display();
+
     if(b.checkStatus(p1No)==b.DRAW) std::cout<<"The game ended in a draw.\n";
     else if(b.checkStatus(p1No)==b.WIN) std::cout<<"You win!!\n";
     else std::cout<<"You lose~~\n";

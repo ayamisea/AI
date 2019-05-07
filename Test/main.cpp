@@ -49,8 +49,7 @@ int main()
         if(game.End())break;
         do
         {
-            system("pause");
-            system("cls");
+
             game.getBoard().Display();
             game.showColor();
             game.ShowRemainBrick();
@@ -63,5 +62,9 @@ int main()
         game.setMoveRecord(pos,game.getP1No());
         game.showMoveRecord();
     }
+
+    system("pause");
+    system("cls");
+
     return 0;
 }
