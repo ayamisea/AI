@@ -6,7 +6,7 @@ void State::incrementVisit()
 }
 void State::addScore(const double &score)
 {
-    if(winScore!=INT_MIN) winScore += score;
+    if(winScore!=INT_MIN ) winScore += score;
 }
 
 void State::randomPlay()

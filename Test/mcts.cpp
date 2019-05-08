@@ -13,18 +13,18 @@ Position MCTS::findNextMove(const Board &b,int pyNo)
 
     opponent = 3 - pyNo;
 
-    Tree tree;
+    Tree* tree = new Tree();
     //Node rootNode = tree.getRoot();
-    tree.getRoot().parenet = NULL;
-    tree.getRoot().state.setBoard(b);
-    tree.getRoot().state.setPlayerNo(opponent);
+    tree->getRoot().parenet = NULL;
+    tree->getRoot().state.setBoard(b);
+    tree->getRoot().state.setPlayerNo(opponent);
 
     //while(currentTimeMillis() < end_)
     //int counter=0;
     while(currentTimeMillis() < end_)
     {
         //Section
-        Node* promisingNode = selectPromisingNode(tree.getRoot());
+        Node* promisingNode = selectPromisingNode(tree->getRoot());
 
         /*
         std::cout<<"Promising Node:\n";
@@ -51,7 +51,7 @@ Position MCTS::findNextMove(const Board &b,int pyNo)
         Node* nodeToExplore = promisingNode;
         if(promisingNode->childArray.size() > 0)
         {
-            nodeToExplore = tree.getRandomChildNode(promisingNode);
+            nodeToExplore = tree->getRandomChildNode(promisingNode);
         }
 
         /*
@@ -73,7 +73,7 @@ Position MCTS::findNextMove(const Board &b,int pyNo)
         backPropogation(nodeToExplore,playoutResult);
 
 
-        std::cout<<"tree root Visit:"<<tree.getRoot().state.getVisitCount()<<"\n\n";
+        std::cout<<"tree root Visit:"<<tree->getRoot().state.getVisitCount()<<"\n\n";
         while(nodeToExplore != NULL)
         {
            std::cout<<"<"<<nodeToExplore->state.getPosition().row<<","<<nodeToExplore->state.getPosition().col<<">\n";
@@ -88,10 +88,13 @@ Position MCTS::findNextMove(const Board &b,int pyNo)
     }
 
 
-    Position winPosition = tree.getChildWithMaxScore(tree.getRoot())->state.getPosition();
+    Position winPosition = tree->getChildWithMaxScore(tree->getRoot())->state.getPosition();
     //tree.setRoot(winnerNode);
 
-    std::cout<<"-----"<<tree.getRoot().state.getVisitCount();
+    delete tree;
+    tree = NULL;
+
+
 
     /*
     std::cout<<"Winner:\n";
@@ -165,7 +168,7 @@ int MCTS::simulateRandomPlayout(Node* node)
     Node* tempNode = (new Node(*node));
     State tempState = tempNode->state;
     int pyNo = tempState.getPlayerNo();
-    int opPyNo = tempState.getOpponent();
+
     int boardStatus = tempState.getBoard().checkStatus(pyNo);
 
     tempNode->state.getBoard().Display();
@@ -174,17 +177,20 @@ int MCTS::simulateRandomPlayout(Node* node)
     int win = tempState.getBoard().WIN;
     int in_progress=tempState.getBoard().IN_PROGRESS;
     int draw = tempState.getBoard().DRAW;
+    int lose = tempState.getBoard().LOSE;
 
-    if( (boardStatus == win && pyNo==opponent))
+    if(boardStatus == win && pyNo==opponent)
     {
         node->parenet->state.setWinScore((double)INT_MIN);
-
-        std::cout<<"!!!";
-        tempState.getBoard().Display();
         delete tempNode;
         tempNode = NULL;
-
-
+        return opponent;
+    }
+    else if( boardStatus == lose && pyNo==(3-opponent))
+    {
+        node->state.setWinScore((double)INT_MIN);
+        delete tempNode;
+        tempNode = NULL;
         return opponent;
     }
     while(boardStatus == in_progress)
@@ -220,7 +226,7 @@ Node* MCTS::findBestNodeWithUCT( Node* n)
 
     Node* maxNode = NULL;
     double max_UCT=(double)INT_MIN;
-    std::cout<<"find UCT=============\n";
+    std::cout<<"find UCT =============\n";
     for(auto & node: n->childArray)
     {
         double uct=uctValue(parentVisit,node->state.getWinScore(),node->state.getVisitCount());

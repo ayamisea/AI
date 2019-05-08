@@ -24,6 +24,7 @@ Node* Tree::getChildWithMaxScore(Node& n)
              vc=node->state.getVisitCount();
              maxNode = node;
          }
+         std::cout<<node->state.getPosition().row<<","<<node->state.getPosition().col<<" ("<<node->state.getVisitCount()<<") ";
      }
      return maxNode;
 }
