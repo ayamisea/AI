@@ -66,7 +66,7 @@ void MCTS::expandNode(Node* node)
     std::vector<State> possibleStates;
     std::vector<Position> availavlePositions = node->state.getBoard().getRemainBricks(No);
 
-    //setAllPossibleStates()
+    //setAllPossibleStates
     Board b=node->state.getBoard();
     for(auto const& pos:availavlePositions)
     {
