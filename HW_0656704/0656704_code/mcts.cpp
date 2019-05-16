@@ -62,12 +62,11 @@ Node* MCTS::selectPromisingNode(Node &n)
 
 void MCTS::expandNode(Node* node)
 {
-    //getAllPossibleStates()
     int No=node->state.getOpponent();
     std::vector<State> possibleStates;
     std::vector<Position> availavlePositions = node->state.getBoard().getRemainBricks(No);
 
-    //Position
+    //setAllPossibleStates()
     Board b=node->state.getBoard();
     for(auto const& pos:availavlePositions)
     {
@@ -79,7 +78,7 @@ void MCTS::expandNode(Node* node)
         possibleStates.push_back(newState);
     }
 
-    //getPossibleStates
+    //expandNodes
     for(auto const& s:possibleStates)
     {
         Node* newNode = new Node{};
