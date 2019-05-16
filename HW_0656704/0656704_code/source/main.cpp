@@ -20,7 +20,7 @@ int main()
 
         do
         {
-            std::cout<<"What the brick do you want to take away[row,col]?";
+            std::cout<<"Which brick do you want to take [row,col]?";
             scanf("%d %d",&pos.row,&pos.col);
 
         }
@@ -51,7 +51,7 @@ int main()
             game.showColor();
             game.ShowRemainBrick();
 
-            std::cout<<"What the brick do you want to take away[row,col]?";
+            std::cout<<"Which brick do you want to take [row,col]?";
             scanf("%d %d",&pos.row,&pos.col);
         }
         while(!game.getBoard().performMove(pos,game.getP1No()));

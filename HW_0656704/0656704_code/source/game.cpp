@@ -5,7 +5,7 @@ bool Game::Initialize()
     while(true)
     {
 
-        std::cout<<"Please input the size of board. [n by n]:";
+        std::cout<<"Please input the size of the board. [n by n]:";
         std::cin>>s;
         if(s<0 || s>=INT_MAX) return false;
         if(s%2)std::cout<<"Size cannot be odd.\n";
@@ -30,8 +30,8 @@ bool Game::End()
     b.Display();
 
     if(b.checkStatus(p1No)==b.DRAW) std::cout<<"The game ended in a draw.\n";
-    else if(b.checkStatus(p1No)==b.WIN) std::cout<<"You win!!\n";
-    else std::cout<<"You lose~~\n";
+    else if(b.checkStatus(p1No)==b.WIN) std::cout<<"You win.\n";
+    else std::cout<<"You lose.\n";
     showMoveRecord();
 
     return true;
